@@ -12,4 +12,8 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteCategory(): void {
+    alert('Excluir')
+  }
+
 }
