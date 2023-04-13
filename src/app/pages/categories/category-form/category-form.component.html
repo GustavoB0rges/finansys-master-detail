@@ -9,7 +9,7 @@
 <div class="row bg-gradient mb-4">
     <div class="col-md">
         <h1 class="h2 border-start ps-2">
-            Formulário de Categoria
+            Formulário de Categoria {{ currentAction }}
         </h1>
 
     </div>
@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<form>
+<form [formGroup]="categoryForm">
 
     <div class="card">
         <div class="card-header">   
@@ -42,6 +42,6 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-md float-end mt-3">Salvar</button>
+    <button type="submit" (click)="showSuccess($event)"class="btn btn-primary btn-md float-end mt-3">Salvar</button>
 
 </form>
