@@ -24,14 +24,13 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
-  deleteCategory(id: number): void {
+  deleteCategory(category: any): void {
     const mustDelete = confirm('Deseja realmente excluir este item?');
     if (mustDelete) {
-      this.categoryService.delete(id).subscribe({
-        next: () => alert('Categoria exluida com sucesso'),
+      this.categoryService.delete(category.id).subscribe({
+        next: () => this.categories = this.categories.filter(element => element !== category),
         error: (error) => alert('Erro ao exluir o registro'),
       });
-      this.getAllCategories();
     }
   }
 
