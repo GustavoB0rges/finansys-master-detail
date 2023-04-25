@@ -56,7 +56,18 @@ export class EntryService {
 
   private jsonDataToEntries(jsonData: any[]): Entry[] {
     const entries: Entry[] = [];
-    jsonData.forEach(element => entries.push(element as Entry));
+
+    console.log(Object.assign(new Entry(), jsonData[0]));
+    
+
+    jsonData.forEach(element => {
+      const entry = Object.assign(new Entry(), element);
+      entries.push(entry);
+    });
+
+    console.log(entries);
+    
+
     return entries;
     // "as" = operador de conversão de tipo,
     // Por exemplo, se você tem uma variável de tipo "any" e deseja convertê-la para um tipo mais específico, pode usar "as" para realizar a conversão

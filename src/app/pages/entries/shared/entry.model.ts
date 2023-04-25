@@ -9,9 +9,9 @@ export class Entry {
         public amount?: string,
         public date?: string,
         public paid?: boolean,
-        public categoryId?: boolean,
-        public category?: Category,
-    ){}
+        public categoryId?: number,
+        public category?: Category
+    ) { }
 
     static typers = {
         expense: 'Despesa',
