@@ -57,16 +57,10 @@ export class EntryService {
   private jsonDataToEntries(jsonData: any[]): Entry[] {
     const entries: Entry[] = [];
 
-    console.log(Object.assign(new Entry(), jsonData[0]));
-    
-
     jsonData.forEach(element => {
       const entry = Object.assign(new Entry(), element);
       entries.push(entry);
     });
-
-    console.log(entries);
-    
 
     return entries;
     // "as" = operador de conversão de tipo,
@@ -74,8 +68,6 @@ export class EntryService {
   }
 
   private jsonDataToEntry(jsonData: any): Entry {
-    console.log(jsonData);
-    
     return jsonData as Entry;
   }
 

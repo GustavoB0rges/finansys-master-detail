@@ -63,8 +63,6 @@ export class CategoryService {
   }
 
   private jsonDataToCategory(jsonData: any): Category {
-    console.log(jsonData);
-    
     return jsonData as Category;
   }
 
