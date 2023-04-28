@@ -26,6 +26,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   submittingForm = false;
   entry: Entry = new Entry();
   categories: Array<Category>;
+  types: any = [];
 
   iMaskConfig = {
     mask: Number,
@@ -51,6 +52,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     this.buildEntryForm();
     this.loadEntry();
     this.loadCategories();
+    this.typeOptions();
 
     this.primengConfig.setTranslation({
       firstDayOfWeek: 0,
@@ -81,15 +83,15 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     }
   }
 
-  get typeOptions(): Array<any> {
+  typeOptions(): Array<any> {
     return Object.entries(Entry.types).map(
       ([value, text]) => {
-        return {
+        this.types.push({
           text: text,
           value: value
-        }
+        }) ;
       }
-    )
+    );
   }
 
   // PRIVATE METHODS
