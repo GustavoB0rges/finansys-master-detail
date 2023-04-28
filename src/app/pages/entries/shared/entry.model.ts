@@ -13,9 +13,9 @@ export class Entry {
         public category?: Category
     ) { }
 
-    static typers = {
+    static types = {
         expense: 'Despesa',
-        renevue: 'Receita'
+        revenue: 'Receita'
     };
 
     get paidText(): string {
