@@ -15,18 +15,17 @@
     </div>
     <div class="col-md-3">
         <a routerLink="/entries" class="btn btn-secondary float-end">
-           << Voltar
-        </a>
+            << Voltar </a>
     </div>
 </div>
 
 <form [formGroup]="entryForm" (submit)="submitForm()">
 
     <div class="card">
-        <div class="card-header">   
+        <div class="card-header">
             Informações sobre o Lançamento
         </div>
-        
+
         <div class="card-body">
 
             <div class="row mb-3">
@@ -34,7 +33,7 @@
                     <label for="type">Tipo</label>
 
                     <select name="type" id="type" formControlName="type" class="form-control">
-                        <option *ngFor="let otption of typeOptions" [value]="otption.value">{{ otption.text }}</option>
+                        <option *ngFor="let option of types" [value]="option.value">{{ option.text }}</option>
                     </select>
 
                     <div class="text-danger" *ngIf="entryForm.get('type').invalid && entryForm.get('type').touched">
@@ -58,7 +57,8 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">R$</div>
                         </div>
-                        <input [imask]="iMaskConfig" type="text" class="form-control text-end" id="amount" formControlName="amount">
+                        <input [imask]="iMaskConfig" type="text" class="form-control text-end" id="amount"
+                            formControlName="amount">
                     </div>
 
                     <div class="text-danger" *ngIf="entryForm.get('amount').invalid && entryForm.get('amount').touched">
@@ -68,12 +68,8 @@
 
                 <div class="form-group col-md-2">
                     <label for="date">Data</label>
-                    <p-calendar 
-                        [formControlName]="'date'" 
-                        [inputStyleClass]="'form-control'"
-                        [dataType]="'string'"
-                        [dateFormat]="'dd/mm/yy'"
-                        [showButtonBar]="true">
+                    <p-calendar [formControlName]="'date'" [inputStyleClass]="'form-control'" [dataType]="'string'"
+                        [dateFormat]="'dd/mm/yy'" [showButtonBar]="true">
                     </p-calendar>
 
                     <div class="text-danger" *ngIf="entryForm.get('date').invalid && entryForm.get('date').touched">
@@ -87,10 +83,12 @@
                     <label for="paid">Pago</label>
 
                     <div class="btn-group">
-                        <label (click)="entryForm.get('paid').setValue(true)" [class.active]="entryForm.get('paid').value" class="btn btn-outline-info">
+                        <label (click)="entryForm.get('paid').setValue(true)"
+                            [class.active]="entryForm.get('paid').value" class="btn btn-outline-info">
                             Pago
                         </label>
-                        <label (click)="entryForm.get('paid').setValue(false)" [class.active]="!entryForm.get('paid').value" class="btn btn-outline-info">
+                        <label (click)="entryForm.get('paid').setValue(false)"
+                            [class.active]="!entryForm.get('paid').value" class="btn btn-outline-info">
                             Pendente
                         </label>
                     </div>
@@ -107,7 +105,8 @@
                         <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
                     </select>
 
-                    <div class="text-danger" *ngIf="entryForm.get('categoryId').invalid && entryForm.get('categoryId').touched">
+                    <div class="text-danger"
+                        *ngIf="entryForm.get('categoryId').invalid && entryForm.get('categoryId').touched">
                         <div *ngIf="entryForm.get('categoryId').hasError('required')">Dado Obrigatório</div>
                     </div>
                 </div>
@@ -127,7 +126,8 @@
         </ul>
     </div>
 
-    <button type="submit" [disabled]="submittingForm || entryForm.invalid" class="btn btn-primary btn-md float-end mt-3">Salvar</button>
+    <button type="submit" [disabled]="submittingForm || entryForm.invalid"
+        class="btn btn-primary btn-md float-end mt-3">Salvar</button>
 
 </form>
 
