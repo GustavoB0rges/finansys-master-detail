@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CalendarModule } from "primeng/calendar";
 import { IMaskModule } from "angular-imask";
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [EntryListComponent, EntryFormComponent],
@@ -16,6 +17,7 @@ import { IMaskModule } from "angular-imask";
     EntriesRoutingModule,
     ReactiveFormsModule,
     CalendarModule,
+    MenubarModule,
     IMaskModule
   ],
 })
