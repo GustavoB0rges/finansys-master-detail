@@ -1,7 +1,10 @@
-export class Category {
+import { BaseResourceModel } from "../../entries/shared/models/base-resource.model";
+
+export class Category extends BaseResourceModel{
     constructor(
         public name?: string,
-        public id?: number,
         public description?: string
-    ){}
+    ){
+        super();
+    }
 }
