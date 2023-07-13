@@ -1,7 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, flatMap, mergeMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { Entry } from './entry.model';
 import { CategoryService } from '../../categories/shared/category.service';
 import { BaseResourceService } from './services/base-resource.service';
