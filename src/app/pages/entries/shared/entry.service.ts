@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { Entry } from './entry.model';
 import { CategoryService } from '../../categories/shared/category.service';
 import { BaseResourceService } from './services/base-resource.service';
@@ -14,44 +14,25 @@ export class EntryService extends BaseResourceService<Entry> {
     private categoryService: CategoryService,
     protected override injector: Injector
   ) { 
-    super('api/entries', injector);
+    super('api/entries', injector, Entry.fromJsonData);
   }
 
   override create(entry: Entry): Observable<Entry> {
-    return this.categoryService.getById(entry.categoryId).pipe(
-      mergeMap(category => {
-        entry.category = category;
-        return super.create(entry);
-      })
-    );
+    return this.setCategoryAndSendtoService(entry, super.create.bind(this));
   }
 
   override update(entry: Entry): Observable<Entry> {
+    return this.setCategoryAndSendtoService(entry, super.update.bind(this));
+  }
+
+  setCategoryAndSendtoService(entry: Entry, sendFn: any): Observable<Entry> {
     return this.categoryService.getById(entry.categoryId).pipe(
       mergeMap(category => {
         entry.category = category;
-        return super.update(entry);
-      })
+        return sendFn(entry);
+      }),
+      catchError(this.handleError)
     );
-  }
-
-  // Private methods
-
-  protected override jsonDataToResources(jsonData: any[]): Entry[] {
-    const entries: Entry[] = [];
-
-    jsonData.forEach(element => {
-      const entry = Entry.fromJsonData(element);
-      entries.push(entry);
-    });
-
-    return entries;
-    // "as" = operador de conversão de tipo,
-    // Por exemplo, se você tem uma variável de tipo "any" e deseja convertê-la para um tipo mais específico, pode usar "as" para realizar a conversão
-  }
-
-  protected override jsonDataToResource(jsonData: any): Entry {
-    return jsonData as Entry;
   }
 
 }
