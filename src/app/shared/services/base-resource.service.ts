@@ -1,4 +1,4 @@
-import { BaseResourceModel } from '../models/base-resource.model';
+import { BaseResourceModel } from '../../shared/models/base-resource.model';
 import { HttpClient } from '@angular/common/http';
 import { Injector } from '@angular/core';
 
