@@ -14,7 +14,7 @@ export class EntryService extends BaseResourceService<Entry> {
     private categoryService: CategoryService,
     protected override injector: Injector
   ) { 
-    super('api/entries', injector);
+    super('api/entries', injector, Entry.fromJsonData);
   }
 
   override create(entry: Entry): Observable<Entry> {
@@ -33,25 +33,6 @@ export class EntryService extends BaseResourceService<Entry> {
         return super.update(entry);
       })
     );
-  }
-
-  // Private methods
-
-  protected override jsonDataToResources(jsonData: any[]): Entry[] {
-    const entries: Entry[] = [];
-
-    jsonData.forEach(element => {
-      const entry = Entry.fromJsonData(element);
-      entries.push(entry);
-    });
-
-    return entries;
-    // "as" = operador de conversão de tipo,
-    // Por exemplo, se você tem uma variável de tipo "any" e deseja convertê-la para um tipo mais específico, pode usar "as" para realizar a conversão
-  }
-
-  protected override jsonDataToResource(jsonData: any): Entry {
-    return jsonData as Entry;
   }
 
 }
