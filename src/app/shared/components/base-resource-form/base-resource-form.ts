@@ -78,7 +78,7 @@ protected formBuilder: FormBuilder;
     if (this.currentAction === 'new') {
       this.pageTitle = this.creationPageTitle();
     } else {
-      const categoryName = this.EditionPageTitle();
+      const categoryName = this.editionPageTitle();
       this.pageTitle = 'Editando Categoria: ' + categoryName;
     }
   }
@@ -86,7 +86,7 @@ protected formBuilder: FormBuilder;
   protected creationPageTitle(): string {
     return 'Novo'
   }
-  protected EditionPageTitle(): string {
+  protected editionPageTitle(): string {
     return 'Novo'
   }
 
@@ -101,7 +101,7 @@ protected formBuilder: FormBuilder;
   protected updateResource(): void {
     const resource: T = this.jsonDataResourceFn(this.resourceForm.value);
     this.baseResourceService.update(resource).subscribe({
-      next: (resource) => this.actionsForSuccess(resource),
+      next: () => this.actionsForSuccess(resource),
       error: (error) => this.actionsForError(error)
     });
   }
@@ -110,7 +110,7 @@ protected formBuilder: FormBuilder;
     const baseComponentPath = this.route.snapshot.parent.url[0].path;
     this.toastr.success('Solicitação processada com sucesso!');
     this.router.navigateByUrl(baseComponentPath, { skipLocationChange: true }).then(
-      () => this.router.navigate([baseComponentPath, resource.id, 'edit'])
+      () => this.router.navigate([baseComponentPath, resource?.id, 'edit'])
     );
   }
 
