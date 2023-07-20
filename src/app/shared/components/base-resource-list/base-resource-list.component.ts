@@ -1,29 +1,30 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BaseResourceService } from '../../services/base-resource.service';
+import { BaseResourceModel } from '../../models/base-resource.model';
 
 @Injectable()
-export class BaseResourceListComponent<T> implements OnInit {
+export class BaseResourceListComponent<T extends BaseResourceModel> implements OnInit {
 
   resources: T[] = []
 
-  constructor(private baseResourceService: BaseResourceService<T>) { }
+  constructor(private baseResourceService: BaseResourceService<T> ) { }
 
   ngOnInit(): void {
-    this.getAllCategories();    
+    this.getAllResources();    
   }
 
-  getAllCategories(): void {
+  getAllResources(): void {
     this.baseResourceService.getAll().subscribe({
       next: (resources) => this.resources = resources,
       error: (error) => alert('Erro ao carregar a Lista de Categorias')
     });
   }
 
-  deleteCategory(category: any): void {
+  deleteResource(resource: T): void {
     const mustDelete = confirm('Deseja realmente excluir este item?');
     if (mustDelete) {
-      this.baseResourceService.delete(category.id).subscribe({
-        next: () => this.resources = this.resources.filter(element => element !== category),
+      this.baseResourceService.delete(resource.id).subscribe({
+        next: () => this.resources = this.resources.filter(element => element !== resource),
         error: (error) => alert('Erro ao exluir o registro'),
       });
     }
