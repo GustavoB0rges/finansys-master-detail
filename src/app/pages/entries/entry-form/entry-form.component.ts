@@ -88,4 +88,13 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry> impleme
     );
   }
 
+  protected override creationPageTitle(): string {
+    return "Cadastro de Novo Lançamento";
+  }
+
+  protected override editionPageTitle(): string {
+    const resourceName = this.resource.name || "";
+    return "Editando Lançamento: " + resourceName;
+  }
+
 }

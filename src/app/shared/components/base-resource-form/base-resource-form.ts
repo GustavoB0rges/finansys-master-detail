@@ -78,8 +78,7 @@ protected formBuilder: FormBuilder;
     if (this.currentAction === 'new') {
       this.pageTitle = this.creationPageTitle();
     } else {
-      const categoryName = this.editionPageTitle();
-      this.pageTitle = 'Editando Categoria: ' + categoryName;
+      this.pageTitle = this.editionPageTitle();
     }
   }
 
@@ -87,7 +86,7 @@ protected formBuilder: FormBuilder;
     return 'Novo'
   }
   protected editionPageTitle(): string {
-    return 'Novo'
+    return 'Edição'
   }
 
   protected createResource(): void {
