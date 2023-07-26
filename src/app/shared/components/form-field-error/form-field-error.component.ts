@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-form-field-error',
   template: `
-    <p class="text-danger">
+    <p class='text-danger'>
       {{ errorMenssage }}
     </p> 
   `,
@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 })
 export class FormFieldErrorComponent implements OnInit {
 
-  @Input() formControl: FormControl;
+  @Input('form-control') formControl: FormControl;
 
   constructor() { }
 
@@ -47,7 +47,8 @@ export class FormFieldErrorComponent implements OnInit {
       const requiredLength = this.formControl.errors['maxlength'].requiredLength;
       return `deve ter no máximo ${requiredLength} caracteres`;
     }
-    
+
+    return null;
   }
 
 }

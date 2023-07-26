@@ -73,7 +73,7 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry> impleme
     this.resourceForm = this.formBuilder.group({
       id: [null],
       name: [null, [ Validators.required, Validators.minLength(2) ]],
-      description: [null],
+      description: [null, Validators.maxLength(20)],
       type: ["expense", [Validators.required]],
       amount: [null, [Validators.required]],
       date: [null, [Validators.required]],
