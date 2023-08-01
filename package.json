@@ -23,6 +23,7 @@
     "angular-in-memory-web-api": "^0.15.0",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.3.2",
+    "currency-formatter": "^1.5.9",
     "moment": "^2.29.4",
     "ngx-toastr": "^16.1.0",
     "primeng": "^15.4.1",
