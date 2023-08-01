@@ -23,7 +23,7 @@ export class ReportsComponent implements OnInit {
   expenseChartData: any;
   revenueChartData: any;
 
-  chartOption = {
+  chartOptions = {
     scales: {
       yAxes: [{
         ticks: {
@@ -49,6 +49,10 @@ export class ReportsComponent implements OnInit {
     const month = this.month.nativeElement.value;
     const year = this.year.nativeElement.value;
 
+    console.log(month);
+    console.log(year);
+    
+
     if (!month || !year)
       alert('Você precisa selecionar um Mês e o Ano para gerar os relatórios');
     else
@@ -56,6 +60,8 @@ export class ReportsComponent implements OnInit {
   }
 
   private setValues(entries: Entry[]) {
+    console.log(entries);
+    
     this.entries = entries;
     this.calculateBalance();
     this.setChartData();
@@ -78,15 +84,26 @@ export class ReportsComponent implements OnInit {
     this.balance = currencyFormatter.format(revenueTotal - expenseTotal, { code: 'BRL'});
   }
 
+
+
   private setChartData() {
+    this.revenueChartData = this.getChartData('revenue', 'Gráfico de Receitas', '#9CCC65');
+    this.expenseChartData = this.getChartData('expense', 'Gráfico de Despesas', '#e03131');
+
+    console.log(this.revenueChartData);
+    console.log(this.expenseChartData);
+    
+  }
+
+  private getChartData(entryType: string, title: string, color: string) {
     const chartData = [];
 
     this.categories.forEach(category => {
-      const filteredEntries = this.entries.filter(entry => (entry.categoryId === category.id && entry.type === 'revenue'));
+      const filteredEntries = this.entries.filter(entry => (entry.categoryId === category.id) && (entry.type === entryType));
 
       if (filteredEntries.length > 0) {
-        const totalAmount = filteredEntries.reduce((total, entry) => total + currencyFormatter.unformat(entry.amount, { code: 'BRL'}, 0)); 
-        
+        const totalAmount = filteredEntries.reduce((total, entry) => total + currencyFormatter.unformat(entry.amount, { code: 'BRL'}), 0); 
+       
         chartData.push({
           categoryName: category.name,
           totalAmount: totalAmount 
@@ -94,12 +111,12 @@ export class ReportsComponent implements OnInit {
       }
     });
 
-    this.revenueChartData = {
+    return {
       labels: chartData.map(item => item.categoryName),
       datasets: [
         {
-          label: 'Gráficos de Receitas',
-          backgroundColor: '#9CCC65',
+          label: title,
+          backgroundColor: color,
           data: chartData.map(item => item.totalAmount)
         }
       ]
